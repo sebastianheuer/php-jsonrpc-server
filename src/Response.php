@@ -15,9 +15,20 @@ class Response
      */
     protected $_id = '';
 
+    /**
+     * @var
+     */
     protected $_result;
 
+    /**
+     * @var
+     */
     protected $_error;
+
+    public function __construct($id)
+    {
+        $this->_id = $id;
+    }
 
     /**
      * @param $result
@@ -27,6 +38,11 @@ class Response
         $this->_result = $result;
     }
 
+    /**
+     * Returns the response body as a string
+     *
+     * @return string
+     */
     public function __toString()
     {
         $jsonData = array(

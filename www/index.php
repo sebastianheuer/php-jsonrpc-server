@@ -11,5 +11,5 @@ if (!$request->isJsonRpcRequest()) {
 $method = $request->getMethod();
 $params = $request->getParams();
 
-$response = new Response();
+$response = new Response($request->getId());
 echo $response . "\n";
