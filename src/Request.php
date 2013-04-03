@@ -109,10 +109,16 @@ class Request
     }
 
     /**
-     * @return string
+     * @return string|NULL
      */
     public function getId()
     {
+        /*
+         * id may be omitted in the request (meaning it is a notification)
+         */
+        if (!$this->_hasJsonParam('id')) {
+            return NULL;
+        }
         return $this->_getJsonParam('id');
     }
 
@@ -125,6 +131,8 @@ class Request
     }
 
     /**
+     * @param string $param
+     * @throws InvalidParamsException
      * @return mixed
      */
     public function getParam($param)
