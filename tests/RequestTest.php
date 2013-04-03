@@ -20,6 +20,28 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     *
+     */
+    public function testIsNotificationReturnsTrueIfNoIdSet()
+    {
+        $content = json_encode(array());
+        $request = new Request(array(), $this->_serverData, $content);
+
+        $this->assertTrue($request->isNotification());
+    }
+
+    /**
+     *
+     */
+    public function testIsNotificationReturnsFalseIfIdSet()
+    {
+        $content = json_encode(array('id' => 'foo'));
+        $request = new Request(array(), $this->_serverData, $content);
+
+        $this->assertFalse($request->isNotification());
+    }
+
+    /**
      * @expectedException \belanur\jsonrpc2\server\RequestException
      */
     public function testThrowsExceptionIfRequestBodyIsInvalid()

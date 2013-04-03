@@ -125,14 +125,43 @@ class Request
     }
 
     /**
+     * @return mixed
+     */
+    public function getParam($param)
+    {
+        $params = $this->getParams();
+        if (!isset($params[$param])) {
+            throw new InvalidParamsException("Method Parameter $param not found.");
+        }
+        return $params[$param];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotification()
+    {
+        return !$this->_hasJsonParam('id');
+    }
+
+    /**
      * @param string $param
-     * @throws RequestException
+     * @return bool
+     */
+    private function _hasJsonParam($param)
+    {
+        return isset($this->_content[$param]);
+    }
+
+    /**
+     * @param string $param
+     * @throws InvalidParamsException
      * @return mixed
      */
     private function _getJsonParam($param)
     {
-        if (!isset($this->_content[$param])) {
-            throw new RequestException("Request Parameter $param not found.");
+        if (!$this->_hasJsonParam($param)) {
+            throw new InvalidParamsException("Parameter $param not found.");
         }
         return $this->_content[$param];
     }

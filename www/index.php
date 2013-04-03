@@ -10,8 +10,24 @@ if (!$request->isJsonRpcRequest()) {
     throw new \Exception('Not a JSON-RPC request');
 }
 
-$method = $request->getMethod();
-$params = $request->getParams();
-
 $response = new Response($request->getId());
-echo $response . "\n";
+$factory = new CommandFactory($request);
+
+try {
+    $command = $factory->getCommandForMethod($request->getMethod());
+    $result = $command->work();
+    $response->setResult($result);
+} catch (JsonRpcException $e) {
+    $error = new Error($e->getJsonRpcCode(), $e->getMessage());
+    $response->setError($error);
+}
+
+
+/**
+ * the server MUST not send a response if the client sent a notification
+ */
+if ($request->isNotification()) {
+    exit;
+}
+
+echo $response->flush() . "\n";
