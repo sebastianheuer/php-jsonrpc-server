@@ -39,7 +39,7 @@ class Response
     }
 
     /**
-     * Returns the response body as a string
+     * Returns the response body as a JSON string
      *
      * @return string
      */

@@ -3,7 +3,9 @@ namespace belanur\jsonrpc2\server;
 
 require __DIR__ . '/../src/autoload.php';
 
-$request = new Request($_POST, $_SERVER);
+$requestContent = file_get_contents('php://input');
+$request = new Request($_POST, $_SERVER, $requestContent);
+
 if (!$request->isJsonRpcRequest()) {
     throw new \Exception('Not a JSON-RPC request');
 }

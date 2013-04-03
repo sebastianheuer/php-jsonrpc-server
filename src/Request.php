@@ -19,18 +19,25 @@ class Request
     protected $_server = array();
 
     /**
-     * @var array JSON-RPC payload (e.g. method, params)
+     * @var array Request body
      */
-    protected $_payload = NULL;
+    protected $_content = array();
 
     /**
      * @param array $post
      * @param array $server
+     * @param string $content
+     * @throws RequestException
      */
-    public function __construct(array $post, array $server)
+    public function __construct(array $post, array $server, $content)
     {
         $this->_post = $post;
         $this->_server = $server;
+        $content = json_decode($content, TRUE);
+        if (NULL === $content) {
+            throw new RequestException("Invalid Request Body");
+        }
+        $this->_content = $content;
     }
 
     /**
@@ -109,6 +116,9 @@ class Request
         return $this->_getJsonParam('id');
     }
 
+    /**
+     * @return mixed
+     */
     public function getParams()
     {
         return $this->_getJsonParam('params');
@@ -116,16 +126,15 @@ class Request
 
     /**
      * @param string $param
+     * @throws RequestException
      * @return mixed
      */
     private function _getJsonParam($param)
     {
-        if (NULL === $this->_payload) {
-            $this->_payload = json_decode(
-                file_get_contents('php://input'), TRUE
-            );
+        if (!isset($this->_content[$param])) {
+            throw new RequestException("Request Parameter $param not found.");
         }
-        return $this->_payload[$param];
+        return $this->_content[$param];
     }
 
 }
