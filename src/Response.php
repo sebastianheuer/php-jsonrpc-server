@@ -50,10 +50,7 @@ class Response
      */
     public function flush()
     {
-        $jsonData = array(
-            'jsonrpc' => self::PROTOCOL_VERSION,
-            'id' => $this->_id
-        );
+        $jsonData = array('jsonrpc' => self::PROTOCOL_VERSION);
 
         if (NULL !== $this->_result && $this->_error === NULL) {
             $jsonData['result'] = $this->_result;
@@ -64,8 +61,13 @@ class Response
                 'code' => $this->_error->getCode(),
                 'message' => $this->_error->getMessage()
             );
+            $data = $this->_error->getData();
+            if (NULL !== $data) {
+                $jsonData['error']['data'] = $data;
+            }
         }
 
+        $jsonData['id'] = $this->_id;
         return json_encode($jsonData);
     }
 }

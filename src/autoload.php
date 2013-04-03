@@ -14,6 +14,7 @@ spl_autoload_register(
                 'belanur\\jsonrpc2\\server\\invalidparamsexception' => '/exceptions/InvalidParamsException.php',
                 'belanur\\jsonrpc2\\server\\jsonrpcexception' => '/exceptions/JsonRpcException.php',
                 'belanur\\jsonrpc2\\server\\methodnotfoundexception' => '/exceptions/MethodNotFoundException.php',
+                'belanur\\jsonrpc2\\server\\parseerrorexception' => '/exceptions/ParseErrorException.php',
                 'belanur\\jsonrpc2\\server\\request' => '/Request.php',
                 'belanur\\jsonrpc2\\server\\requestexception' => '/RequestException.php',
                 'belanur\\jsonrpc2\\server\\response' => '/Response.php',

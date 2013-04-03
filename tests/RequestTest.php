@@ -42,7 +42,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \belanur\jsonrpc2\server\RequestException
+     * @expectedException \belanur\jsonrpc2\server\ParseErrorException
      */
     public function testThrowsExceptionIfRequestBodyIsInvalid()
     {
@@ -63,7 +63,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \belanur\jsonrpc2\server\RequestException
+     * @expectedException \belanur\jsonrpc2\server\InvalidParamsException
      */
     public function testThrowsExceptionIfParamIsMissing()
     {

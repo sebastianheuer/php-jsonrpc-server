@@ -27,7 +27,7 @@ class Request
      * @param array $post
      * @param array $server
      * @param string $content
-     * @throws RequestException
+     * @throws ParseErrorException
      */
     public function __construct(array $post, array $server, $content)
     {
@@ -35,7 +35,7 @@ class Request
         $this->_server = $server;
         $content = json_decode($content, TRUE);
         if (NULL === $content) {
-            throw new RequestException("Invalid Request Body");
+            throw new ParseErrorException("Request does not contain valid JSON");
         }
         $this->_content = $content;
     }

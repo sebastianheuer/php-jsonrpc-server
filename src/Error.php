@@ -14,10 +14,11 @@ class Error
 
     protected $_data;
 
-    public function __construct($code, $message)
+    public function __construct($code, $message, $data = NULL)
     {
         $this->_code = $code;
         $this->_message = $message;
+        $this->_data = $data;
     }
 
     public function getCode()
@@ -29,6 +30,13 @@ class Error
     {
         return $this->_message;
     }
+
+    public function getData()
+    {
+        return $this->_data;
+    }
+
+
 
 }
  
