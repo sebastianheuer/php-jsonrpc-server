@@ -22,7 +22,6 @@ try {
     $response->setError($error);
 }
 
-
 /**
  * the server MUST not send a response if the client sent a notification
  */

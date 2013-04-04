@@ -50,6 +50,8 @@ class Response
      */
     public function flush()
     {
+        header('Content-Type: application/json');
+
         $jsonData = array('jsonrpc' => self::PROTOCOL_VERSION);
 
         if (NULL !== $this->_result && $this->_error === NULL) {
