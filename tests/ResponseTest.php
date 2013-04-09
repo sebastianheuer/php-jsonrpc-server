@@ -30,6 +30,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2.0', $decodedBody['jsonrpc']);
     }
 
+    /**
+     * @testdox Request ID is returned in Response
+     */
     public function testResponseBodyContainsExpectedId()
     {
         $response = new Response($this->_php, 1);
