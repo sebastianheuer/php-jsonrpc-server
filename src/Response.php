@@ -25,8 +25,18 @@ class Response
      */
     protected $_error;
 
-    public function __construct($id = NULL)
+    /**
+     * @var PHP
+     */
+    protected $_php;
+
+    /**
+     * @param PHP $php
+     * @param string|null $id
+     */
+    public function __construct(PHP $php, $id = NULL)
     {
+        $this->_php = $php;
         $this->_id = $id;
     }
 
@@ -38,6 +48,9 @@ class Response
         $this->_result = $result;
     }
 
+    /**
+     * @param Error $error
+     */
     public function setError(Error $error)
     {
         $this->_error = $error;
@@ -50,7 +63,7 @@ class Response
      */
     public function flush()
     {
-        header('Content-Type: application/json');
+        $this->_php->setHeader('Content-Type', 'application/json');
 
         $jsonData = array('jsonrpc' => self::PROTOCOL_VERSION);
 
