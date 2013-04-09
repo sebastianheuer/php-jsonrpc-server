@@ -41,7 +41,7 @@ class Response
     }
 
     /**
-     * @param $result
+     * @param mixed $result
      */
     public function setResult($result)
     {

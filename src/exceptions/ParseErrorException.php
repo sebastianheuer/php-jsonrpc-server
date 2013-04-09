@@ -4,7 +4,7 @@ namespace belanur\jsonrpc2\server;
 /**
  * InvalidParamsException
  *
- *
+ * @codeCoverageIgnore
  */
 class ParseErrorException extends JsonRpcException
 {

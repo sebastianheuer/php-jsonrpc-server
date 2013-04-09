@@ -124,6 +124,28 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($id, $request->getId());
     }
 
+    /**
+     * @testdox getId() returns NULL if Request does not contain id param
+     */
+    public function testGetIdReturnsNullIfParamDoesNotExist()
+    {
+        $content = json_encode(array());
+        $request = new Request(array(), $this->_serverData, $content);
+
+        $this->assertNull($request->getId());
+    }
+
+    /**
+     * @expectedException \belanur\jsonrpc2\server\InvalidParamsException
+     */
+    public function testGetParamThrowsException()
+    {
+        $content = json_encode(array('params' => array()));
+        $request = new Request(array(), $this->_serverData, $content);
+
+        $request->getParam('foo');
+    }
+
 
     public static function validMethodProvider()
     {

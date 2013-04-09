@@ -1,6 +1,7 @@
 <?php
 namespace belanur\jsonrpc2\server\tests;
 use belanur\jsonrpc2\server\Response;
+use belanur\jsonrpc2\server\Error;
 
 /**
  * ResponseTest
@@ -44,6 +45,27 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $body = $response->flush();
         $decodedBody = json_decode($body, TRUE);
         $this->assertEquals(NULL, $decodedBody['id']);
+    }
+
+    public function testResponseBodyContainsErrorObjectData()
+    {
+        $response = new Response($this->_php);
+        $error = new Error(-32000, 'foo', array('bar'));
+        $response->setError($error);
+        $body = $response->flush();
+        $decodedBody = json_decode($body, TRUE);
+        $this->assertEquals(-32000, $decodedBody['error']['code']);
+        $this->assertEquals('foo', $decodedBody['error']['message']);
+        $this->assertEquals(array('bar'), $decodedBody['error']['data']);
+    }
+
+    public function testResponseBodyContainsResultData()
+    {
+        $response = new Response($this->_php);
+        $response->setResult('foo');
+        $body = $response->flush();
+        $decodedBody = json_decode($body, TRUE);
+        $this->assertEquals('foo', $decodedBody['result']);
     }
 
 }

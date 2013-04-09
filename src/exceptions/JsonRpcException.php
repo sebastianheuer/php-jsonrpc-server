@@ -4,7 +4,7 @@ namespace belanur\jsonrpc2\server;
 /**
  * JsonRpcException
  *
- *
+ * @codeCoverageIgnore
  */
 abstract class JsonRpcException extends \Exception
 {

@@ -4,7 +4,7 @@ namespace belanur\jsonrpc2\server;
 /**
  * MethodNotFoundException
  *
- *
+ * @codeCoverageIgnore
  */
 class MethodNotFoundException extends JsonRpcException
 {
