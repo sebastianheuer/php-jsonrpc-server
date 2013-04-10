@@ -10,7 +10,7 @@ if (!$request->isJsonRpcRequest()) {
     throw new \Exception('Not a JSON-RPC request');
 }
 
-$response = new Response($request->getId());
+$response = new Response(new Php(), $request->getId());
 $factory = new CommandFactory($request);
 
 try {
