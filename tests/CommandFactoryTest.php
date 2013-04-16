@@ -17,34 +17,16 @@ class CommandFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider methodProvider
      *
-     * @param $method
-     * @param $expectedClass
      */
-    public function testCreatesExpectedCommand($method, $expectedClass)
+    public function testCreatesInstanceForSubtractCommand()
     {
-        $expectedClass = '\\belanur\\jsonrpc2\\server\\' . $expectedClass;
+        $expectedClass = '\\belanur\\jsonrpc2\\server\\subtractcommand';
 
         $factory = new CommandFactory($this->_request);
-        $command = $factory->getCommandForMethod($method);
+        $command = $factory->getInstanceForSubtractCommand(10,10);
         $this->assertInstanceOf($expectedClass, $command);
     }
 
-    public static function methodProvider()
-    {
-        return array(
-            array('subtract', 'SubtractCommand')
-        );
-    }
-
-    /**
-     * @expectedException \belanur\jsonrpc2\server\MethodNotFoundException
-     */
-    public function testThrowsExceptionIfMethodIsUnknown()
-    {
-        $factory = new CommandFactory($this->_request);
-        $factory->getCommandForMethod('foo');
-    }
 }
  

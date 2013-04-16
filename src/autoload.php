@@ -10,6 +10,7 @@ spl_autoload_register(
                 'belanur\\jsonrpc2\\server\\abstractcommand' => '/commands/AbstractCommand.php',
                 'belanur\\jsonrpc2\\server\\commandfactory' => '/CommandFactory.php',
                 'belanur\\jsonrpc2\\server\\commandinterface' => '/commands/CommandInterface.php',
+                'belanur\\jsonrpc2\\server\\commandlocator' => '/CommandLocator.php',
                 'belanur\\jsonrpc2\\server\\error' => '/Error.php',
                 'belanur\\jsonrpc2\\server\\invalidparamsexception' => '/exceptions/InvalidParamsException.php',
                 'belanur\\jsonrpc2\\server\\jsonrpcexception' => '/exceptions/JsonRpcException.php',
@@ -18,7 +19,9 @@ spl_autoload_register(
                 'belanur\\jsonrpc2\\server\\php' => '/Php.php',
                 'belanur\\jsonrpc2\\server\\request' => '/Request.php',
                 'belanur\\jsonrpc2\\server\\response' => '/Response.php',
-                'belanur\\jsonrpc2\\server\\subtractcommand' => '/commands/SubtractCommand.php'
+                'belanur\\jsonrpc2\\server\\service' => '/Service.php',
+                'belanur\\jsonrpc2\\server\\subtractcommand' => '/commands/SubtractCommand.php',
+                'belanur\\jsonrpc2\\server\\subtractor' => '/Subtractor.php'
             );
         }
         $cn = strtolower($class);

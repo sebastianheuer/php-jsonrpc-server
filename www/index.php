@@ -13,9 +13,16 @@ if (!$request->isJsonRpcRequest()) {
 $response = new Response(new Php(), $request->getId());
 $factory = new CommandFactory($request);
 
+$service = new Service($factory);
+
 try {
-    $command = $factory->getCommandForMethod($request->getMethod());
-    $result = $command->work();
+
+    $method = new \ReflectionMethod($service, $request->getMethod());
+    if (count($request->getParams()) != $method->getNumberOfParameters()) {
+        throw new InvalidParamsException();
+    }
+
+    $result = call_user_func_array(array($service, $request->getMethod()), $request->getParams());
     $response->setResult($result);
 } catch (JsonRpcException $e) {
     $error = new Error($e->getJsonRpcCode(), $e->getMessage());

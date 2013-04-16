@@ -9,30 +9,13 @@ namespace belanur\jsonrpc2\server;
 class CommandFactory
 {
     /**
-     * @var Request
+     * @param $minuend
+     * @param $subtrahend
+     * @return SubtractCommand
      */
-    protected $_request;
-
-    /**
-     * @param Request $request
-     */
-    public function __construct(Request $request)
+    public function getInstanceForSubtractCommand($minuend, $subtrahend)
     {
-        $this->_request = $request;
-    }
-
-    /**
-     * @param $method
-     * @throws MethodNotFoundException
-     * @return CommandInterface
-     */
-    public function getCommandForMethod($method)
-    {
-        $className = '\\belanur\\jsonrpc2\\server\\' . $method . 'Command';
-        if (!class_exists($className)) {
-            throw new MethodNotFoundException("Unknown method $method");
-        }
-        return new $className($this->_request);
+        return new SubtractCommand($minuend, $subtrahend);
     }
 }
  

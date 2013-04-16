@@ -14,17 +14,7 @@ class SubtractCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnsExpectedResult($minuend, $subtrahend, $expected)
     {
-        $content = json_encode(
-            array(
-                'params' => array(
-                    'minuend' => $minuend,
-                    'subtrahend' => $subtrahend
-                )
-            )
-        );
-
-        $request = new Request(array(), array(), $content);
-        $command = new SubtractCommand($request);
+        $command = new SubtractCommand($minuend, $subtrahend);
         $result = $command->work();
         $this->assertEquals($expected, $result);
     }
@@ -32,7 +22,8 @@ class SubtractCommandTest extends \PHPUnit_Framework_TestCase
     public function paramProvider()
     {
         return array(
-            array(10, 1, 9)
+            array(10, 1, 9),
+            array(1, 10, -9)
         );
     }
 }
